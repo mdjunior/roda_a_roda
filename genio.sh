@@ -22,6 +22,8 @@ do
     if [ ${string:$i:1} != "_" ]
     then
         exec+="&& \$$((i+1)) == \"${string:$i:1}\" ";
+
+        # Colocando variavel para excluir letras mencionadas
         grep+=" grep -v ${string:$i:1} |";
     fi
     i=$((i+1));
