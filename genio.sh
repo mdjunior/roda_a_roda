@@ -22,6 +22,7 @@ do
     if [ ${string:$i:1} != "_" ]
     then
         exec+="&& \$$((i+1)) == \"${string:$i:1}\" ";
+        grep+=" grep -v ${string:$i:1} |";
     fi
     i=$((i+1));
 done
@@ -31,6 +32,6 @@ exec+=") print \$0;}' ";
 echo "Executando: $exec";
 eval $exec;
 
-exec+=" | grep -o '\S' | awk '{a[\$1]++}END{for(k in a)print a[k],k}' | sort -nr | head -$l"
+exec+=" | grep -o '\S' | awk '{a[\$1]++}END{for(k in a)print a[k],k}' | sort -nr | $grep head -$l"
 echo "Melhores opcoes de letras: $exec"
 eval $exec;
